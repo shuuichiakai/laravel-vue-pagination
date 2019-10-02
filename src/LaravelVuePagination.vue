@@ -78,12 +78,13 @@ export default {
             validator: value => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
             },
-        postType: {
-                type: String,
-                default: 'post'
 
-        }
     },
+    postType: {
+            type: String,
+            default: 'post'
+
+    }},
 
     methods: {
         onPaginationChangePage (page,type) {

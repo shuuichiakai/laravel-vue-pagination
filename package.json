@@ -25,8 +25,7 @@
     "now-build": "vue-cli-service build",
     "deploy": "npm run now-build && now && now alias"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.1",
     "@vue/cli-plugin-eslint": "^3.4.1",

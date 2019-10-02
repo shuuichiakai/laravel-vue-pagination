@@ -96,6 +96,49 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "f6fd":
+/***/ (function(module, exports) {
+
+// document.currentScript polyfill by Adam Miller
+
+// MIT license
+
+(function(document){
+  var currentScript = "currentScript",
+      scripts = document.getElementsByTagName('script'); // Live NodeList collection
+
+  // If browser needs currentScript polyfill, add get currentScript() to the document object
+  if (!(currentScript in document)) {
+    Object.defineProperty(document, currentScript, {
+      get: function(){
+
+        // IE 6-10 supports script readyState
+        // IE 10+ support stack trace
+        try { throw new Error(); }
+        catch (err) {
+
+          // Find the second match for the "at" string to get file src url from stack.
+          // Specifically works with the format of stack traces in IE.
+          var i, res = ((/.*at [^\(]*\((.*):.+:.+\)$/ig).exec(err.stack) || [false])[1];
+
+          // For all scripts on the page, if src matches or if ready state is interactive, return the script tag
+          for(i in scripts){
+            if(scripts[i].src == res || scripts[i].readyState == "interactive"){
+              return scripts[i];
+            }
+          }
+
+          // If no match, return null
+          return null;
+        }
+      }
+    });
+  }
+})(document);
+
+
+/***/ }),
+
 /***/ "fb15":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106,6 +149,10 @@ __webpack_require__.r(__webpack_exports__);
 // This file is imported into lib/wc client bundles.
 
 if (typeof window !== 'undefined') {
+  if (true) {
+    __webpack_require__("f6fd")
+  }
+
   var i
   if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
     __webpack_require__.p = i[1] // eslint-disable-line
@@ -115,11 +162,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0fa2e68e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LaravelVuePagination.vue?vue&type=template&id=7f71b5a7&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('renderless-laravel-vue-pagination',{attrs:{"data":_vm.data,"limit":_vm.limit,"show-disabled":_vm.showDisabled,"size":_vm.size,"align":_vm.align},on:{"pagination-change-page":_vm.onPaginationChangePage},scopedSlots:_vm._u([{key:"default",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44097840-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LaravelVuePagination.vue?vue&type=template&id=68442dd7&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('renderless-laravel-vue-pagination',{attrs:{"data":_vm.data,"limit":_vm.limit,"show-disabled":_vm.showDisabled,"size":_vm.size,"align":_vm.align,"post-type":_vm.postType},on:{"pagination-change-page":_vm.onPaginationChangePage},scopedSlots:_vm._u([{key:"default",fn:function(ref){
 var data = ref.data;
 var limit = ref.limit;
 var showDisabled = ref.showDisabled;
+var postType = ref.postType;
 var size = ref.size;
 var align = ref.align;
 var computed = ref.computed;
@@ -135,7 +183,7 @@ return (computed.total > computed.perPage)?_c('ul',{staticClass:"pagination",cla
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/LaravelVuePagination.vue?vue&type=template&id=7f71b5a7&
+// CONCATENATED MODULE: ./src/LaravelVuePagination.vue?vue&type=template&id=68442dd7&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/RenderlessLaravelVuePagination.vue?vue&type=script&lang=js&
 /* harmony default export */ var RenderlessLaravelVuePaginationvue_type_script_lang_js_ = ({
@@ -165,6 +213,10 @@ var staticRenderFns = []
       validator: function validator(value) {
         return ['left', 'center', 'right'].indexOf(value) !== -1;
       }
+    },
+    postType: {
+      type: String,
+      default: 'post'
     }
   },
   computed: {
@@ -242,17 +294,17 @@ var staticRenderFns = []
   },
   methods: {
     previousPage: function previousPage() {
-      this.selectPage(this.currentPage - 1);
+      this.selectPage(this.currentPage - 1, this.postType);
     },
     nextPage: function nextPage() {
-      this.selectPage(this.currentPage + 1);
+      this.selectPage(this.currentPage + 1, this.postType);
     },
-    selectPage: function selectPage(page) {
+    selectPage: function selectPage(page, type) {
       if (page === '...') {
         return;
       }
 
-      this.$emit('pagination-change-page', page);
+      this.$emit('pagination-change-page', page, type);
     }
   },
   render: function render() {
@@ -264,6 +316,7 @@ var staticRenderFns = []
       showDisabled: this.showDisabled,
       size: this.size,
       align: this.align,
+      postType: this.postType,
       computed: {
         isApiResource: this.isApiResource,
         currentPage: this.currentPage,
@@ -297,7 +350,7 @@ var staticRenderFns = []
           click: function click(e) {
             e.preventDefault();
 
-            _this.selectPage(page);
+            _this.selectPage(page, _this.postType);
           }
         };
       }
@@ -471,6 +524,7 @@ var component = normalizeComponent(
 //
 //
 //
+//
 
 /* harmony default export */ var LaravelVuePaginationvue_type_script_lang_js_ = ({
   props: {
@@ -499,11 +553,15 @@ var component = normalizeComponent(
       validator: function validator(value) {
         return ['left', 'center', 'right'].indexOf(value) !== -1;
       }
+    },
+    postType: {
+      type: String,
+      default: 'post'
     }
   },
   methods: {
-    onPaginationChangePage: function onPaginationChangePage(page) {
-      this.$emit('pagination-change-page', page);
+    onPaginationChangePage: function onPaginationChangePage(page, type) {
+      this.$emit('pagination-change-page', page, type);
     }
   },
   components: {

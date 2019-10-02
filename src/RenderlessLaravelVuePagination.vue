@@ -26,10 +26,10 @@ export default {
             validator: value => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
             }
-        },  postType: {
+        },
+        postType: {
                   type: String,
                   default: 'post'
-
           }
     },
 
@@ -109,10 +109,10 @@ export default {
 
     methods: {
         previousPage () {
-            this.selectPage((this.currentPage - 1),this.postType);
+            this.selectPage((this.currentPage - 1), this.postType);
         },
         nextPage () {
-            this.selectPage((this.currentPage + 1),this.postType);
+            this.selectPage((this.currentPage + 1), this.postType);
         },
         selectPage (page,type) {
             if (page === '...') {
@@ -130,7 +130,7 @@ export default {
             showDisabled: this.showDisabled,
             size: this.size,
             align: this.align,
-            postType:this.postType,
+            postType: this.postType,
             computed: {
                 isApiResource: this.isApiResource,
                 currentPage: this.currentPage,
@@ -160,7 +160,7 @@ export default {
             pageButtonEvents: page => ({
                 click: (e) => {
                     e.preventDefault();
-                    this.selectPage(page,this.postType);
+                    this.selectPage(page, this.postType);
                 }
             })
         });
