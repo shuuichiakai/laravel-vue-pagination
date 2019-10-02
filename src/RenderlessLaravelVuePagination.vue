@@ -109,17 +109,17 @@ export default {
 
     methods: {
         previousPage () {
-            this.selectPage((this.currentPage - 1), this.postType);
+            this.selectPage((this.currentPage - 1));
         },
         nextPage () {
-            this.selectPage((this.currentPage + 1), this.postType);
+            this.selectPage((this.currentPage + 1));
         },
-        selectPage (page, type) {
+        selectPage (page) {
             if (page === '...') {
                 return;
             }
 
-            this.$emit('pagination-change-page', page, type);
+            this.$emit('pagination-change-page', page);
         }
     },
 
@@ -160,7 +160,7 @@ export default {
             pageButtonEvents: page => ({
                 click: (e) => {
                     e.preventDefault();
-                    this.selectPage(page, this.postType);
+                    this.selectPage(page);
                 }
             })
         });
