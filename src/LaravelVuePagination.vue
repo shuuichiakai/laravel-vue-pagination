@@ -5,7 +5,11 @@
         :show-disabled="showDisabled"
         :size="size"
         :align="align"
-        v-on:pagination-change-page="onPaginationChangePage">
+        v-on:pagination-change-page="onPaginationChangePage"
+
+        v-on:set-type="onSetType"
+
+        >
 
         <ul class="pagination"
             :class="{
@@ -81,8 +85,11 @@ export default {
     },
 
     methods: {
-        onPaginationChangePage (page,type) {
-            this.$emit('pagination-change-page', page,type);
+        onPaginationChangePage (page) {
+            this.$emit('pagination-change-page', page);
+        }
+        onSetType(type){
+          this.$emit('set-type', type);
         }
     },
 
