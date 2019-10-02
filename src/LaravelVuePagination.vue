@@ -7,7 +7,7 @@
         :align="align"
         v-on:pagination-change-page="onPaginationChangePage"
 
-        v-on:set-type="onSetType"
+        v-on:click="onSetType"
 
         >
 
@@ -89,6 +89,7 @@ export default {
             this.$emit('pagination-change-page', page);
         }
         onSetType(type){
+          alert(type);
           this.$emit('set-type', type);
         }
     },
