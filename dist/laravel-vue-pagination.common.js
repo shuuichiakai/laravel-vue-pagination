@@ -295,7 +295,7 @@ var staticRenderFns = []
         return;
       }
 
-      this.$emit('pagination-change-page', page);
+      this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
     }
   },
   render: function render() {
