@@ -162,7 +162,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44097840-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LaravelVuePagination.vue?vue&type=template&id=d1fbc100&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44097840-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LaravelVuePagination.vue?vue&type=template&id=4fb514f6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('renderless-laravel-vue-pagination',{attrs:{"data":_vm.data,"limit":_vm.limit,"show-disabled":_vm.showDisabled,"size":_vm.size,"align":_vm.align,"post-type":_vm.postType},on:{"pagination-change-page":_vm.onPaginationChangePage},scopedSlots:_vm._u([{key:"default",fn:function(ref){
 var data = ref.data;
 var limit = ref.limit;
@@ -183,7 +183,7 @@ return (computed.total > computed.perPage)?_c('ul',{staticClass:"pagination",cla
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/LaravelVuePagination.vue?vue&type=template&id=d1fbc100&
+// CONCATENATED MODULE: ./src/LaravelVuePagination.vue?vue&type=template&id=4fb514f6&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/RenderlessLaravelVuePagination.vue?vue&type=script&lang=js&
 /* harmony default export */ var RenderlessLaravelVuePaginationvue_type_script_lang_js_ = ({
@@ -304,7 +304,7 @@ var staticRenderFns = []
         return;
       }
 
-      this.$emit('pagination-change-page', page + 'post_type=' + this.data.post_type);
+      this.$emit('pagination-change-page', page, type);
     }
   },
   render: function render() {
@@ -350,7 +350,7 @@ var staticRenderFns = []
           click: function click(e) {
             e.preventDefault();
 
-            _this.selectPage(page);
+            _this.selectPage(page, _this.postType);
           }
         };
       }
@@ -560,8 +560,8 @@ var component = normalizeComponent(
     }
   },
   methods: {
-    onPaginationChangePage: function onPaginationChangePage(page) {
-      this.$emit('pagination-change-page', page + 'post_type=' + this.data.post_type);
+    onPaginationChangePage: function onPaginationChangePage(page, type) {
+      this.$emit('pagination-change-page', page, type);
     }
   },
   components: {

@@ -16,7 +16,7 @@
                 'justify-content-end': align == 'right'
             }"
             v-if="computed.total > computed.perPage"
-            slot-scope="{ data, limit, showDisabled,postType, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
+            slot-scope="{ data, limit, showDisabled, postType, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
 
             <li class="page-item pagination-prev-nav" :class="{'disabled': !computed.prevPageUrl}" v-if="computed.prevPageUrl || showDisabled">
                 <a class="page-link" href="#" aria-label="Previous" :tabindex="!computed.prevPageUrl && -1" v-on="prevButtonEvents">
@@ -77,18 +77,18 @@ export default {
             default: 'left',
             validator: value => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
-            }
+            },
 
-      },
-      postType: {
-              type: String,
-              default: 'post'
-            }
     },
+    postType: {
+            type: String,
+            default: 'post'
+    }
+  },
 
     methods: {
-        onPaginationChangePage (page) {
-            this.$emit('pagination-change-page', page + 'post_type=' + this.data.post_type);
+        onPaginationChangePage (page,type) {
+            this.$emit('pagination-change-page', page, type);
         }
     },
     components: {
