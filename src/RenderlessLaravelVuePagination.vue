@@ -118,7 +118,7 @@ export default {
             if (page === '...') {
                 return;
             }
-            this.$emit('pagination-change-page', page='post_type='+this.data.post_type);
+            this.$emit('pagination-change-page', page + 'post_type=' + this.data.post_type);
         }
     },
 
@@ -159,7 +159,7 @@ export default {
             pageButtonEvents: page => ({
                 click: (e) => {
                     e.preventDefault();
-                    this.selectPage(page, this.postType);
+                    this.selectPage(page);
                 }
             })
         });
