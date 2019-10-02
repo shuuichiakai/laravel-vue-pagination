@@ -114,12 +114,12 @@ export default {
         nextPage () {
             this.selectPage((this.currentPage + 1),this.postType);
         },
-        selectPage (page) {
+        selectPage (page,type) {
             if (page === '...') {
                 return;
             }
 
-            this.$emit('pagination-change-page', page,this.postType);
+            this.$emit('pagination-change-page', page,type);
         }
     },
 
@@ -130,6 +130,7 @@ export default {
             showDisabled: this.showDisabled,
             size: this.size,
             align: this.align,
+            postType:this.postType,
             computed: {
                 isApiResource: this.isApiResource,
                 currentPage: this.currentPage,
