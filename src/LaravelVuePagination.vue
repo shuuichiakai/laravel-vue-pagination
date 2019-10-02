@@ -88,7 +88,7 @@ export default {
 
     methods: {
         onPaginationChangePage (page) {
-            this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
+            this.$emit('pagination-change-page', page );
         }
     },
     components: {
