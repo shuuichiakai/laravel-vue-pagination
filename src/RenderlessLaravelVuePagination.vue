@@ -26,7 +26,11 @@ export default {
             validator: value => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
             }
-        }
+        },  postType: {
+                  type: String,
+                  default: 'post'
+
+          }
     },
 
     computed: {
@@ -105,18 +109,17 @@ export default {
 
     methods: {
         previousPage () {
-            this.selectPage((this.currentPage - 1));
+            this.selectPage((this.currentPage - 1),this.postType);
         },
         nextPage () {
-            this.selectPage((this.currentPage + 1));
+            this.selectPage((this.currentPage + 1),this.postType);
         },
         selectPage (page) {
             if (page === '...') {
                 return;
             }
 
-            this.$emit('pagination-change-page', page);
-            this.$emit('set-type');
+            this.$emit('pagination-change-page', page,this.postType);
         }
     },
 
@@ -156,7 +159,7 @@ export default {
             pageButtonEvents: page => ({
                 click: (e) => {
                     e.preventDefault();
-                    this.selectPage(page);
+                    this.selectPage(page,this.postType);
                 }
             })
         });
