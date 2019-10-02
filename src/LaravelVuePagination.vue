@@ -81,8 +81,8 @@ export default {
     },
 
     methods: {
-        onPaginationChangePage (page) {
-            this.$emit('pagination-change-page', page);
+        onPaginationChangePage (page,type) {
+            this.$emit('pagination-change-page', page,type);
         }
     },
 
