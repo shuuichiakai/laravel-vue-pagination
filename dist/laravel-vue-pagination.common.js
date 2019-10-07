@@ -153,12 +153,13 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44097840-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LaravelVuePagination.vue?vue&type=template&id=4ad53817&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('renderless-laravel-vue-pagination',{attrs:{"data":_vm.data,"limit":_vm.limit,"show-disabled":_vm.showDisabled,"size":_vm.size,"align":_vm.align,"post-type":_vm.postType},on:{"pagination-change-page":_vm.onPaginationChangePage},scopedSlots:_vm._u([{key:"default",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44097840-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LaravelVuePagination.vue?vue&type=template&id=4d14ce1c&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('renderless-laravel-vue-pagination',{attrs:{"data":_vm.data,"limit":_vm.limit,"show-disabled":_vm.showDisabled,"size":_vm.size,"align":_vm.align,"post-type":_vm.postType,"taxonomy":_vm.taxonomy},on:{"pagination-change-page":_vm.onPaginationChangePage},scopedSlots:_vm._u([{key:"default",fn:function(ref){
 var data = ref.data;
 var limit = ref.limit;
 var showDisabled = ref.showDisabled;
 var postType = ref.postType;
+var taxonomy = ref.taxonomy;
 var size = ref.size;
 var align = ref.align;
 var computed = ref.computed;
@@ -174,7 +175,7 @@ return (computed.total > computed.perPage)?_c('ul',{staticClass:"pagination",cla
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/LaravelVuePagination.vue?vue&type=template&id=4ad53817&
+// CONCATENATED MODULE: ./src/LaravelVuePagination.vue?vue&type=template&id=4d14ce1c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/RenderlessLaravelVuePagination.vue?vue&type=script&lang=js&
 /* harmony default export */ var RenderlessLaravelVuePaginationvue_type_script_lang_js_ = ({
@@ -208,6 +209,10 @@ var staticRenderFns = []
     postType: {
       type: String,
       default: 'post'
+    },
+    taxonomy: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -295,7 +300,17 @@ var staticRenderFns = []
         return;
       }
 
-      this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
+      if (this.data.post_type.length > 0) {
+        this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
+      }
+
+      if (this.data.taxonomy.length > 0) {
+        this.$emit('pagination-change-page', page + '&taxonomy=' + this.data.taxonomy);
+      }
+
+      if (this.data.taxonomy.length == 0 && this.data.post_type.length == 0) {
+        this.$emit('pagination-change-page', page);
+      }
     }
   },
   render: function render() {
@@ -308,6 +323,7 @@ var staticRenderFns = []
       size: this.size,
       align: this.align,
       postType: this.postType,
+      taxonomy: this.taxonomy,
       computed: {
         isApiResource: this.isApiResource,
         currentPage: this.currentPage,
@@ -516,6 +532,7 @@ var component = normalizeComponent(
 //
 //
 //
+//
 
 /* harmony default export */ var LaravelVuePaginationvue_type_script_lang_js_ = ({
   props: {
@@ -547,7 +564,11 @@ var component = normalizeComponent(
     },
     postType: {
       type: String,
-      default: 'post'
+      default: ''
+    },
+    taxonomy: {
+      type: String,
+      default: ''
     }
   },
   methods: {

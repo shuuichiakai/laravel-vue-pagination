@@ -30,6 +30,10 @@ export default {
         postType: {
                   type: String,
                   default: 'post'
+          },
+          taxonomy: {
+            type: String,
+            default: ''
           }
     },
 
@@ -118,8 +122,15 @@ export default {
             if (page === '...') {
                 return;
             }
-
-            this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
+            if(this.data.post_type.length > 0){
+              this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
+            }
+            if(this.data.taxonomy.length > 0){
+              this.$emit('pagination-change-page', page + '&taxonomy=' + this.data.taxonomy);
+            }
+            if(this.data.taxonomy.length == 0 && this.data.post_type.length ==0){
+              this.$emit('pagination-change-page', page )
+            }
         }
     },
 
@@ -131,6 +142,7 @@ export default {
             size: this.size,
             align: this.align,
             postType: this.postType,
+            taxonomy: this.taxonomy,
             computed: {
                 isApiResource: this.isApiResource,
                 currentPage: this.currentPage,

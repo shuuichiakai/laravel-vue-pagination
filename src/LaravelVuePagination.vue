@@ -6,6 +6,7 @@
         :size="size"
         :align="align"
         :post-type="postType"
+        :taxonomy="taxonomy"
         v-on:pagination-change-page="onPaginationChangePage">
 
         <ul class="pagination"
@@ -16,7 +17,7 @@
                 'justify-content-end': align == 'right'
             }"
             v-if="computed.total > computed.perPage"
-            slot-scope="{ data, limit, showDisabled, postType, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
+            slot-scope="{ data, limit, showDisabled, postType,taxonomy, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
 
             <li class="page-item pagination-prev-nav" :class="{'disabled': !computed.prevPageUrl}" v-if="computed.prevPageUrl || showDisabled">
                 <a class="page-link" href="#" aria-label="Previous" :tabindex="!computed.prevPageUrl && -1" v-on="prevButtonEvents">
@@ -77,12 +78,16 @@ export default {
             default: 'left',
             validator: value => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
-            },
+            }
 
     },
     postType: {
             type: String,
-            default: 'post'
+            default: ''
+    },
+    taxonomy: {
+      type: String,
+      default: ''
     }
   },
 
