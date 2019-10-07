@@ -300,15 +300,15 @@ var staticRenderFns = []
         return;
       }
 
-      if (this.post_type.length > 0) {
+      if (this.post_type !== '') {
         this.$emit('pagination-change-page', page + '&post_type=' + this.post_type);
       }
 
-      if (this.taxonomy.length > 0) {
+      if (this.taxonomy !== '') {
         this.$emit('pagination-change-page', page + '&taxonomy=' + this.taxonomy);
       }
 
-      if (this.taxonomy.length === 0 && this.post_type.length === 0) {
+      if (this.taxonomy === '' && this.post_type === '') {
         this.$emit('pagination-change-page', page);
       }
     }
