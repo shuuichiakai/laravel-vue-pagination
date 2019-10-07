@@ -122,15 +122,15 @@ export default {
             if (page === '...') {
                 return;
             }
-            if(this.data.post_type !== ''){
+            if(this.data.hasOwnProperty('post_type')){
               this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
             }
-            if(this.data.taxonomy !== ''){
+            if(this.data.hasOwnProperty('taxonomy')){
               this.$emit('pagination-change-page', page + '&taxonomy=' + this.data.taxonomy);
             }
-            if(this.data.taxonomy === '' && this.data.post_type === ''){
-              this.$emit('pagination-change-page', page )
-            }
+            // if(this.data.taxonomy === '' && this.data.post_type === ''){
+            //   this.$emit('pagination-change-page', page )
+            // }
         }
     },
 
