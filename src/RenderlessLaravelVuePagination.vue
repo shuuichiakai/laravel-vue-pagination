@@ -128,7 +128,7 @@ export default {
             if(this.taxonomy.length > 0){
               this.$emit('pagination-change-page', page + '&taxonomy=' + this.taxonomy);
             }
-            if(this.taxonomy.length == 0 && this.post_type.length == 0){
+            if(this.taxonomy.length === 0 && this.post_type.length === 0){
               this.$emit('pagination-change-page', page )
             }
         }

@@ -300,15 +300,15 @@ var staticRenderFns = []
         return;
       }
 
-      if (this.data.post_type.length > 0) {
-        this.$emit('pagination-change-page', page + '&post_type=' + this.data.post_type);
+      if (this.post_type.length > 0) {
+        this.$emit('pagination-change-page', page + '&post_type=' + this.post_type);
       }
 
-      if (this.data.taxonomy.length > 0) {
-        this.$emit('pagination-change-page', page + '&taxonomy=' + this.data.taxonomy);
+      if (this.taxonomy.length > 0) {
+        this.$emit('pagination-change-page', page + '&taxonomy=' + this.taxonomy);
       }
 
-      if (this.data.taxonomy.length == 0 && this.data.post_type.length == 0) {
+      if (this.taxonomy.length === 0 && this.post_type.length === 0) {
         this.$emit('pagination-change-page', page);
       }
     }
