@@ -128,6 +128,7 @@ export default {
             if(this.data.hasOwnProperty('taxonomy')){
               this.$emit('pagination-change-page', page + '&taxonomy=' + this.data.taxonomy);
             }
+            
             // if(this.data.taxonomy === '' && this.data.post_type === ''){
             //   this.$emit('pagination-change-page', page )
             // }
