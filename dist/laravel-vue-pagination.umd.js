@@ -315,10 +315,11 @@ var staticRenderFns = []
 
       if (this.data.hasOwnProperty('taxonomy') && this.data.taxonomy !== 'undefined') {
         this.$emit('pagination-change-page', page + '&taxonomy=' + this.data.taxonomy);
-      } // if(this.data.taxonomy === '' && this.data.post_type === ''){
-      //   this.$emit('pagination-change-page', page )
-      // }
+      }
 
+      if (!this.data.hasOwnProperty('post_type') && !this.data.hasOwnProperty('taxonomy')) {
+        this.$emit('pagination-change-page', page);
+      }
     }
   },
   render: function render() {
